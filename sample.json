@@ -1,0 +1,29 @@
+[
+  {
+    "name": "mYbTYL",
+    "type": "MCD",
+    "col": 0,
+    "row": 0,
+    "colspan": 12,
+    "rowspan": 12,
+    "bounds": { "y": 0, "x": 0, "width": 50, "height": 100 }
+  },
+  {
+    "name": "MhzTWp",
+    "type": "pivot-table",
+    "col": 12,
+    "row": 0,
+    "colspan": 12,
+    "rowspan": 6,
+    "bounds": { "y": 0, "x": 50, "width": 50, "height": 50 }
+  },
+  {
+    "name": "ajVMVRz",
+    "type": "table",
+    "col": 12,
+    "row": 6,
+    "colspan": 12,
+    "rowspan": 6,
+    "bounds": { "y": 50, "x": 50, "width": 50, "height": 50 }
+  }
+]

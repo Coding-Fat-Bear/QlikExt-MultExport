@@ -1,0 +1,8 @@
+{
+	"name" : "MCD",
+	"description" : "Extension to download ",
+	"icon" : "extension",
+	"type" : "visualization",
+	"version": "0.1",
+	"author": "AGN_Lijoe"
+}
