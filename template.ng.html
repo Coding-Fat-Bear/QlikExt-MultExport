@@ -1,23 +1,22 @@
 <div qv-extension>
-  <b ng-bind="myTitle"></b>
-
   <table border="1">
     <thead>
-      <tr>
-        <th
-          ng-repeat="dim in layout.qHyperCube.qDimensionInfo"
-          ng-bind="dim.qFallbackTitle"
-        ></th>
-        <th
-          ng-repeat="mea in layout.qHyperCube.qMeasureInfo"
-          ng-bind="mea.qFallbackTitle"
-        ></th>
-      </tr>
+      <th>Selection</th>
+      <th>Object name</th>
+      <th>Selection Status</th>
+      <th>Title</th>
     </thead>
     <tbody>
-      <tr ng-repeat="row in layout.qHyperCube.qDataPages[0].qMatrix">
-        <td ng-repeat="col in row">{{col.qText}}</td>
+      <tr ng-repeat="row in objIdList">
+        <td>
+          <input type="checkbox" ng-model="row.selected" />
+        </td>
+        <td>{{row.name}}</td>
+        <td>{{row.selected}}</td>
+        <td>{{row.title}}</td>
       </tr>
     </tbody>
   </table>
+  <button ng-click="show()">show</button>
+  <button ng-click="export()">Export</button>
 </div>
