@@ -3,9 +3,6 @@ define([
   "./initialproperties",
   "text!./template.ng.html",
   "qlik",
-  "./lib/components/eui-button/eui-button",
-  "./lib/components/eui-overlay/eui-overlay",
-  "./lib/components/eui-simple-table/eui-simple-table",
 ], function (props, initProps, ngTemplate, qlik) {
   "use strict";
 
@@ -37,11 +34,21 @@ define([
         // console.log($scope.getBasePath());
         var app = qlik.currApp(this);
         $scope.objIdList = [];
+        $scope.objUpList = [];
         app.getAppObjectList("sheet", function (reply) {
           $scope.objIdList.length = 0;
-          reply.qAppObjectList.qItems[0].qData.cells.forEach((element) => {
-            $scope.objIdList.push(element);
+
+          console.log(reply.qAppObjectList);
+          reply.qAppObjectList.qItems.forEach((Items) => {
+            Items.qData.cells.forEach((element) => {
+              console.log(element);
+              $scope.objIdList.push(element);
+            });
           });
+          
+          // reply.qAppObjectList.qItems[0].qData.cells.forEach((element) => {
+          //   $scope.objIdList.push(element);
+          // });
           $scope.getObjlist = async function () {
             for (let i = 0; i < $scope.objIdList.length; i++) {
               await app
@@ -69,7 +76,7 @@ define([
             console.log("Selected object:", object.name);
             app.getObject(object.name).then((model) => {
               model
-                .exportData("OOXML", "/qHyperCubeDef", "test")
+                .exportData("OOXML", "/qHyperCubeDef", object.title)
                 .then(function (retVal) {
                   var qUrl = retVal.result ? retVal.result.qUrl : retVal.qUrl;
                   console.log(qUrl);

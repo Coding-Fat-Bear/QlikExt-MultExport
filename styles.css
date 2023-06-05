@@ -1,0 +1,44 @@
+table {
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #f6f8f9;
+  color: #555;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f6f8f9;
+}
+
+tr:hover {
+  background-color: #e6f3f7;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.button-bar {
+  margin-top: 10px;
+}
+
+.button-bar button {
+  margin-right: 10px;
+}
+/* CSS for scroll bar */
+.scrollable-table {
+  max-height: 300px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
