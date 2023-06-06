@@ -1,5 +1,4 @@
 <style>
-
   table {
     margin-bottom: 20px;
     border-collapse: collapse;
@@ -58,7 +57,11 @@
       <tbody>
         <tr ng-repeat="row in objIdList">
           <td>
-            <input type="checkbox" ng-model="row.selected" />
+            <input
+              type="checkbox"
+              ng-model="row.selected"
+              ng-change="store()"
+            />
           </td>
           <td>{{row.name}}</td>
           <td>{{row.selected}}</td>
@@ -67,6 +70,7 @@
       </tbody>
     </table>
   </div>
-  <button ng-click="show()">show</button>
+  <!-- <button ng-click="store()">store</button>
+  <button ng-click="show()">show</button> -->
   <button ng-click="export()">Export</button>
 </div>

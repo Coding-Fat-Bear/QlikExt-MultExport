@@ -15,6 +15,9 @@ define([
     controller: [
       "$scope",
       function ($scope) {
+        let app = qlik.currApp(this);
+        let variableName = "myPersistentVariablebooktest";
+
         $scope.getBasePath = function () {
           var prefix = window.location.pathname.substr(
               0,
@@ -32,12 +35,40 @@ define([
           );
         };
         // console.log($scope.getBasePath());
-        var app = qlik.currApp(this);
-        $scope.objIdList = [];
-        $scope.objUpList = [];
-        app.getAppObjectList("sheet", function (reply) {
-          $scope.objIdList.length = 0;
 
+        $scope.objIdList = [];
+        $scope.selectedList = [];
+
+        app.getAppObjectList("sheet", async function (reply) {
+          try {
+            await app.variable.getByName(variableName).then(function (reply) {
+              if (reply) {
+                console.log("already variable created");
+              } else {
+              }
+            });
+          } catch (error) {
+            console.log("line69" + JSON.stringify(error));
+            console.log("created");
+            app.variable.create({
+              qName: variableName,
+              qDefinition: 0,
+              qIncludeInBookmark: true,
+            });
+          }
+
+          try {
+            await app.variable.getContent(variableName, function (reply) {
+              $scope.selectedList = JSON.parse(reply.qContent.qString);
+              console.log(
+                "setting selections" + JSON.stringify($scope.selectedList)
+              );
+            });
+          } catch (error) {
+            console.log("line81" + JSON.stringify(error));
+          }
+
+          $scope.objIdList.length = 0;
           console.log(reply.qAppObjectList);
           reply.qAppObjectList.qItems.forEach((Items) => {
             Items.qData.cells.forEach((element) => {
@@ -45,10 +76,6 @@ define([
               $scope.objIdList.push(element);
             });
           });
-          
-          // reply.qAppObjectList.qItems[0].qData.cells.forEach((element) => {
-          //   $scope.objIdList.push(element);
-          // });
           $scope.getObjlist = async function () {
             for (let i = 0; i < $scope.objIdList.length; i++) {
               await app
@@ -64,6 +91,27 @@ define([
                   }
                 });
             }
+            console.log($scope.objIdList);
+            console.log($scope.selectedList);
+
+            for (let i = 0; i < $scope.objIdList.length; i++) {
+              const idToCheck = $scope.objIdList[i].name;
+              for (let j = 0; j < $scope.selectedList.length; j++) {
+                if ($scope.selectedList[j].name == idToCheck) {
+                  console.log(
+                    "same at" + $scope.selectedList[j].name + " id " + idToCheck
+                  );
+                  $scope.objIdList[i].selected =
+                    $scope.selectedList[j].selected;
+                  console.log($scope.objIdList[i].selected);
+                  console.log($scope.selectedList[j].selected);
+                  break;
+                } else {
+                  $scope.objIdList[i].selected = false;
+                }
+              }
+            }
+
             // console.log("reply-" + JSON.stringify($scope.objIdList));
           };
           $scope.getObjlist();
@@ -93,8 +141,19 @@ define([
           });
         };
 
-        $scope.show = function () {
-          console.log(JSON.stringify($scope.objIdList));
+        $scope.store = function () {
+          $scope.selectedList = $scope.objIdList;
+          var selectedListString = JSON.stringify($scope.selectedList);
+          app.variable.setStringValue(variableName, selectedListString);
+          console.log("stored" + selectedListString);
+        };
+
+        $scope.show = async function () {
+          await app.variable.getContent(variableName, function (reply) {
+            console.log(reply.qContent.qString);
+            $scope.selectedList = JSON.parse(reply.qContent.qString);
+            console.log($scope.selectedList);
+          });
         };
       },
     ],
