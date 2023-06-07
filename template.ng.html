@@ -40,12 +40,15 @@
   }
   /* CSS for scroll bar */
   .scrollable-table {
-    max-height: 300px; /* Adjust the height as needed */
+    max-height: 500px; /* Adjust the height as needed */
     overflow-y: auto;
   }
 </style>
 
 <div qv-extension>
+  <!-- <button ng-click="show()">show</button> -->
+  <button ng-click="selectAll()">Check All</button>
+  <button ng-click="export()">Export</button>
   <div class="scrollable-table">
     <table border="1">
       <thead>
@@ -68,7 +71,7 @@
       </tbody>
     </table>
   </div>
-  <!-- <button ng-click="store()">store</button> -->
-  <button ng-click="selectAll()">Check All</button>
-  <button ng-click="export()">Export</button>
+  <!-- <button ng-click="show()">show</button> -->
+  <!-- <button ng-click="selectAll()">Check All</button>
+  <button ng-click="export()">Export</button> -->
 </div>

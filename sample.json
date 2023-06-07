@@ -7,9 +7,9 @@
     "colspan": 12,
     "rowspan": 6,
     "bounds": { "y": 0, "x": 50, "width": 50, "height": 50 },
-    "$$hashKey": "object:567",
+    "$$hashKey": "object:468",
     "title": "Table 1",
-    "selected": true
+    "selected": false
   },
   {
     "name": "AHMJFc",
@@ -19,7 +19,7 @@
     "colspan": 12,
     "rowspan": 6,
     "bounds": { "y": 0, "x": 0, "width": 50, "height": 50 },
-    "$$hashKey": "object:568",
+    "$$hashKey": "object:469",
     "title": "No Title -AHMJFc",
     "selected": false
   },
@@ -31,21 +31,21 @@
     "colspan": 12,
     "rowspan": 6,
     "bounds": { "y": 50, "x": 0, "width": 50, "height": 50 },
-    "$$hashKey": "object:569",
+    "$$hashKey": "object:470",
     "title": "Table 2",
     "selected": false
   },
   {
-    "name": "bUgtX",
-    "type": "pivot-table",
+    "name": "DFVEjpT",
+    "type": "kpi",
     "col": 12,
     "row": 6,
     "colspan": 12,
     "rowspan": 6,
     "bounds": { "y": 50, "x": 50, "width": 50, "height": 50 },
-    "$$hashKey": "object:570",
-    "title": "Pivot Table",
-    "selected": true
+    "$$hashKey": "object:471",
+    "title": "No Title -DFVEjpT",
+    "selected": false
   },
   {
     "name": "KKvGL",
@@ -55,7 +55,7 @@
     "colspan": 12,
     "rowspan": 6,
     "bounds": { "y": 0, "x": 0, "width": 50, "height": 50 },
-    "$$hashKey": "object:571",
+    "$$hashKey": "object:472",
     "title": "Table 3",
     "selected": false
   },
@@ -67,7 +67,7 @@
     "colspan": 12,
     "rowspan": 6,
     "bounds": { "y": 0, "x": 50, "width": 50, "height": 50 },
-    "$$hashKey": "object:572",
+    "$$hashKey": "object:473",
     "title": "table 4",
     "selected": false
   }

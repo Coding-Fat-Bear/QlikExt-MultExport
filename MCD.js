@@ -38,7 +38,9 @@ define([
 
         $scope.objIdList = [];
         $scope.selectedList = [];
-
+        $scope.mcdID;
+        $scope.rep;
+        $scope.height;
         app.getAppObjectList("sheet", async function (reply) {
           try {
             await app.variable.getByName(variableName).then(function (reply) {
@@ -59,6 +61,7 @@ define([
 
           try {
             await app.variable.getContent(variableName, function (reply) {
+              $scope.rep = reply;
               $scope.selectedList = JSON.parse(reply.qContent.qString);
               console.log(
                 "setting selections" + JSON.stringify($scope.selectedList)
@@ -75,6 +78,8 @@ define([
               console.log(element);
               if (element.type != "MCD") {
                 $scope.objIdList.push(element);
+              } else {
+                $scope.mcdID = element.name;
               }
             });
           });
@@ -126,11 +131,15 @@ define([
             console.log("Selected object:", object.name);
             app.getObject(object.name).then((model) => {
               model
-                .exportData("OOXML", "/qHyperCubeDef", object.title)
+                .exportData(
+                  "OOXML",
+                  "/qHyperCubeDef",
+                  object.title + " " + object.name
+                )
                 .then(function (retVal) {
                   var qUrl = retVal.result ? retVal.result.qUrl : retVal.qUrl;
-                  console.log(qUrl);
                   var link = $scope.getBasePath() + qUrl;
+                  console.log(link);
                   window.open(link);
                 })
                 .catch(function (err) {
@@ -157,11 +166,18 @@ define([
         };
 
         $scope.show = async function () {
-          await app.variable.getContent(variableName, function (reply) {
-            console.log(reply.qContent.qString);
-            $scope.selectedList = JSON.parse(reply.qContent.qString);
-            console.log($scope.selectedList);
-          });
+          // console.log($scope.rep.qContent.qString);
+          // console.log($scope.objIdList.length);
+          // if ($scope.objIdList.length < 10) {
+          //   $scope.height = 100 + "px";
+          // } else {
+          //   $scope.height = 200 + "px";
+          // }
+          // await app.variable.getContent(variableName, function (reply) {
+          //   console.log(reply.qContent.qString);
+          //   $scope.selectedList = JSON.parse(reply.qContent.qString);
+          //   console.log($scope.selectedList);
+          // });
         };
       },
     ],
