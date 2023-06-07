@@ -73,7 +73,9 @@ define([
           reply.qAppObjectList.qItems.forEach((Items) => {
             Items.qData.cells.forEach((element) => {
               console.log(element);
-              $scope.objIdList.push(element);
+              if (element.type != "MCD") {
+                $scope.objIdList.push(element);
+              }
             });
           });
           $scope.getObjlist = async function () {
@@ -140,7 +142,13 @@ define([
             });
           });
         };
-
+        $scope.selectAll = function () {
+          $scope.objIdList.forEach(function (result) {
+            result.selected = true;
+          });
+          console.log(JSON.stringify($scope.objIdList));
+          $scope.store();
+        };
         $scope.store = function () {
           $scope.selectedList = $scope.objIdList;
           var selectedListString = JSON.stringify($scope.selectedList);

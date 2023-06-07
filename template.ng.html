@@ -51,7 +51,6 @@
       <thead>
         <th>Selection</th>
         <th>Object name</th>
-        <th>Selection Status</th>
         <th>Title</th>
       </thead>
       <tbody>
@@ -64,13 +63,12 @@
             />
           </td>
           <td>{{row.name}}</td>
-          <td>{{row.selected}}</td>
           <td>{{row.title}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <!-- <button ng-click="store()">store</button>
-  <button ng-click="show()">show</button> -->
+  <!-- <button ng-click="store()">store</button> -->
+  <button ng-click="selectAll()">Check All</button>
   <button ng-click="export()">Export</button>
 </div>
