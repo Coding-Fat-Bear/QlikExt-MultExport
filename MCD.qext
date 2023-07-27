@@ -1,6 +1,6 @@
 {
-	"name" : "MCD",
-	"description" : "Extension to download ",
+	"name" : "MCD2",
+	"description" : "Multiple chart download",
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "0.1",

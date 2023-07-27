@@ -82,6 +82,7 @@ define([
                 $scope.mcdID = element.name;
               }
             });
+            console.log(objIdList);
           });
           $scope.getObjlist = async function () {
             for (let i = 0; i < $scope.objIdList.length; i++) {
@@ -158,11 +159,41 @@ define([
           console.log(JSON.stringify($scope.objIdList));
           $scope.store();
         };
+        $scope.unselectAll = function () {
+          $scope.objIdList.forEach(function (result) {
+            result.selected = false;
+          });
+          console.log(JSON.stringify($scope.objIdList));
+          $scope.store();
+        };
         $scope.store = function () {
           $scope.selectedList = $scope.objIdList;
           var selectedListString = JSON.stringify($scope.selectedList);
           app.variable.setStringValue(variableName, selectedListString);
           console.log("stored" + selectedListString);
+        };
+
+        $scope.fetch = async function () {
+          await app.variable.getContent(variableName, function (reply) {
+            console.log(reply);
+            $scope.selectedList = JSON.parse(reply.qContent.qString);
+            console.log(
+              "setting selections" + JSON.stringify($scope.selectedList)
+            );
+          });
+          for (let j = 0; j < $scope.selectedList.length; j++) {
+            if ($scope.selectedList[j].name == idToCheck) {
+              console.log(
+                "same at" + $scope.selectedList[j].name + " id " + idToCheck
+              );
+              $scope.objIdList[i].selected = $scope.selectedList[j].selected;
+              console.log($scope.objIdList[i].selected);
+              console.log($scope.selectedList[j].selected);
+              break;
+            } else {
+              $scope.objIdList[i].selected = false;
+            }
+          }
         };
 
         $scope.show = async function () {
